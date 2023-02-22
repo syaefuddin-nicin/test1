@@ -1,0 +1,27 @@
+- name: Palo Alto Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+
+  vars:
+    palo_provider:
+      ip_address: '192.168.178.138'
+      api_key: LUFRPT00WE1VU2dIcmJUdlEzeWVBNnptQWJyU29YNnc9bGpIVThyVlUxbEJxMTIxYytkQi82RW5sa3N4Y2FmU0h5MEM2cXEvSXdSamZ6YkxER3ZCS0hvN25jeHJLRnA4Mg==
+
+  tasks:
+    - name: Create Server Object
+      panos_address_object:
+        provider: '{{ palo_provider }}'
+        name: 'server1'
+        value: '172.16.1.10'
+        description: 'vmware'
+
+
+
+    - name: Commit
+      panos_commit:
+        provider: '{{ palo_provider }}'
